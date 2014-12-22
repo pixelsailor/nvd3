@@ -45,11 +45,11 @@ if (!Function.prototype.bind) {
 //  Development render timers - disabled if dev = false
 if (nv.dev) {
     nv.dispatch.on('render_start', function(e) {
-        nv.logs.startTime = +new Date();
+        nv.logs.startTime = Date.now();
     });
 
     nv.dispatch.on('render_end', function(e) {
-        nv.logs.endTime = +new Date();
+        nv.logs.endTime = Date.now();
         nv.logs.totalTime = nv.logs.endTime - nv.logs.startTime;
         nv.log('total', nv.logs.totalTime); // used for development, to keep track of graph generation times
     });
