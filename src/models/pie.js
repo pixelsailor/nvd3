@@ -289,7 +289,19 @@ nv.models.pie = function() {
                             "value": getY(d.data),
                             "percent": labelFormat(percent)
                         };
-                        return (d.value && percent > labelThreshold) ? labelTypes[labelType] : '';
+                        // return (d.value && percent > labelThreshold) ? labelTypes[labelType] : '';
+                        
+                        // BEGIN FRONTLINE
+                        if (labelType.search(',') === -1) {
+                            return (d.value && percent > labelThreshold) ? labelTypes[labelType] : '';   
+                        }
+                        else {
+                            var typeArray = labelType.split(',');
+                            if (d.value && percent > labelThreshold) {
+                                return labelTypes[typeArray[0]] + ': ' + labelTypes[typeArray[1]];
+                            }
+                        }
+                        // END FRONTLINE
                     })
                 ;
             }
